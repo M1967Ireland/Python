@@ -12,16 +12,28 @@ from datetime import datetime
 startvalue = str(0)
 
 
+		
 
 class Ui_MainWindow(QMainWindow):
 
+		######### Program
 	def setupUi(self, MainWindow):
 		MainWindow.resize(550, 400)
 		self.centralwidget = QWidget(MainWindow) #centralwidget start
 		self.label = QLabel(self.centralwidget)
 		self.label.setGeometry(QRect(30, 50, 67, 17))
+
+		self.textLabels()
+		self.leftSide()
+		self.rightSide()
+		self.dateFrom()
+		self.datesTo()
+		self.pushButtons()
 		
-		########## text Labels
+		MainWindow.setCentralWidget(self.centralwidget) 
+
+
+	def textLabels(self):
 		self.labelIntro = QLabel(self.centralwidget)
 		self.labelIntro.setGeometry(QRect(75, 20, 400, 17))
 		self.labelIntro.setText ('Please Enter Old value, New value and Days') 
@@ -29,9 +41,8 @@ class Ui_MainWindow(QMainWindow):
 		self.labelEnd = QLabel(self.centralwidget)
 		self.labelEnd.setGeometry(QRect(180, 330, 400, 17))
 		self.labelEnd.setText ('Pay with VAT is estimate, no discount added') 
-		
-		###### Push buttons
-			
+
+	def pushButtons(self):
 		self.button = QPushButton("Calculate Days",self.centralwidget)
 		self.button.move(250, 300)
 		self.button.setStyleSheet("background-color : yellow")
@@ -39,9 +50,9 @@ class Ui_MainWindow(QMainWindow):
 
 		self.button = QPushButton("Calculate Total Sum",self.centralwidget)
 		self.button.move(240, 350)
-		self.button.clicked.connect(self.on_Calculate)
-
-		# Left side
+		self.button.clicked.connect(self.on_Calculate)		
+	
+	def leftSide(self):
 		self.labelOldValue = QLabel(self.centralwidget)
 		self.labelOldValue.setGeometry(QRect(50, 70, 85, 17))
 		self.labelOldValue.setText ('Old Reading') 
@@ -73,7 +84,8 @@ class Ui_MainWindow(QMainWindow):
 		self.unitUsageUnitPrice.setGeometry(QRect(140, 130, 75, 20))
 		self.unitUsageUnitPrice.setAlignment(Qt.AlignCenter)
 
-		# Right side
+	def rightSide(self):
+				# Right side
 		self.labelDays= QLabel(self.centralwidget)
 		self.labelDays.setGeometry(QRect(250, 70, 75, 17))
 		self.labelDays.setText ('Days') 
@@ -103,10 +115,7 @@ class Ui_MainWindow(QMainWindow):
 		self.WithVat.setGeometry(QRect(380, 130, 75, 20))
 		self.WithVat.setAlignment(Qt.AlignCenter)
 
-
-		##########  Day calculation start
-		
-		#Date From
+	def dateFrom(self):
 		self.labelFromDate = QLabel(self.centralwidget)
 		self.labelFromDate.setGeometry(QRect(100, 200,75,17))
 		self.labelFromDate.setText('From Date')
@@ -134,8 +143,8 @@ class Ui_MainWindow(QMainWindow):
 		self.fromDateYear.setGeometry(QRect(350, 200, 50, 25))
 		self.fromDateYear.insert(startvalue)
 		self.fromDateYear.setAlignment(Qt.AlignCenter)
-		
-		#Date To
+
+	def datesTo(self):
 		self.labelToDate = QLabel(self.centralwidget)
 		self.labelToDate.setGeometry(QRect(100, 275,75,17))
 		self.labelToDate.setText('To Date')
@@ -162,12 +171,9 @@ class Ui_MainWindow(QMainWindow):
 		self.toDateYear= QLineEdit(self.centralwidget)
 		self.toDateYear.setGeometry(QRect(350, 270, 50, 25))
 		self.toDateYear.insert(startvalue)
-		self.toDateYear.setAlignment(Qt.AlignCenter)
+		self.toDateYear.setAlignment(Qt.AlignCenter)		
 
 
-		
-		MainWindow.setCentralWidget(self.centralwidget) 
-		
 	def daysCounted(self):
 		
 		fromDay= int(self.fromDateDay.text())
@@ -188,6 +194,8 @@ class Ui_MainWindow(QMainWindow):
 		self.Days.clear()
 		self.Days.insert(amountDays)
 	####### Day calculation end
+
+
 	# 	
 	def on_Calculate(self):
 		
