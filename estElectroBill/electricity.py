@@ -85,7 +85,7 @@ class Ui_MainWindow(QMainWindow):
 		self.unitUsageUnitPrice.setAlignment(Qt.AlignCenter)
 
 	def rightSide(self):
-				# Right side
+				
 		self.labelDays= QLabel(self.centralwidget)
 		self.labelDays.setGeometry(QRect(250, 70, 75, 17))
 		self.labelDays.setText ('Days') 
@@ -193,12 +193,9 @@ class Ui_MainWindow(QMainWindow):
 		amountDays = str(timedelta.days)
 		self.Days.clear()
 		self.Days.insert(amountDays)
-	####### Day calculation end
-
-
-	# 	
+	
 	def on_Calculate(self):
-		
+		self.daysCounted()
 		self.StandingCharge.clear()
 		self.unitUsageUnitPrice.clear()
 		self.differenceValue.clear()
@@ -230,6 +227,8 @@ class Ui_MainWindow(QMainWindow):
 		else: 
 			pso = 6.52
 
+		if daysInserted == 0:
+			daysInserted = self.amountDays # if forgetting to count days before total
 
 		chargeWithVat = ((((daysInserted*0.5517)+ (differentValue *0.1753))+pso) *1.13)
 		chargeWithVat = str(round(chargeWithVat, 2))
