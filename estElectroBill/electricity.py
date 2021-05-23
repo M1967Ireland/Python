@@ -28,7 +28,7 @@ class Ui_MainWindow(QMainWindow):
 		self.labelOldValue.setGeometry(QRect(50, 70, 85, 17))
 		self.labelOldValue.setText ('Old Reading') 
 		self.OldValueInn = QLineEdit(self.centralwidget)
-		self.OldValueInn.setGeometry(QRect(140, 70, 100, 25))
+		self.OldValueInn.setGeometry(QRect(140, 70, 75, 20))
 		self.OldValueInn.insert(startvalue)
 		self.OldValueInn.setAlignment(Qt.AlignCenter)
 		
@@ -36,7 +36,7 @@ class Ui_MainWindow(QMainWindow):
 		self.labelNewValue.setGeometry(QRect(50, 90, 90, 17))
 		self.labelNewValue.setText ('New Reading') 
 		self.newValueInn = QLineEdit(self.centralwidget)
-		self.newValueInn.setGeometry(QRect(140, 90, 100, 25))
+		self.newValueInn.setGeometry(QRect(140, 90, 75, 20))
 		self.newValueInn.insert(startvalue)
 		self.newValueInn.setAlignment(Qt.AlignCenter)
 		
@@ -45,40 +45,41 @@ class Ui_MainWindow(QMainWindow):
 		self.labelDifference.setGeometry(QRect(50, 110, 75, 17))
 		self.labelDifference.setText ('Used') 
 		self.differenceValue= QLineEdit(self.centralwidget)
-		self.differenceValue.setGeometry(QRect(140, 110, 100, 25))
+		self.differenceValue.setGeometry(QRect(140, 110, 75, 20))
 
 		
 		self.labelUnitUsageUnitPrice = QLabel(self.centralwidget)
 		self.labelUnitUsageUnitPrice.setGeometry(QRect(50, 130, 75, 17))
 		self.labelUnitUsageUnitPrice.setText ('Basic €') 
 		self.unitUsageUnitPrice= QLineEdit(self.centralwidget)
-		self.unitUsageUnitPrice.setGeometry(QRect(140, 130, 100, 25))
+		self.unitUsageUnitPrice.setGeometry(QRect(140, 130, 75, 20))
 
 		# Right side
 		self.labelDays= QLabel(self.centralwidget)
 		self.labelDays.setGeometry(QRect(250, 70, 75, 17))
 		self.labelDays.setText ('Days') 
 		self.Days= QLineEdit(self.centralwidget)
-		self.Days.setGeometry(QRect(380, 70, 100, 25))
+		self.Days.setGeometry(QRect(380, 70, 75, 20))
 		self.Days.insert(startvalue)
-		
+		self.Days.setAlignment(Qt.AlignCenter)
+
 		self.labelStandingCharge= QLabel(self.centralwidget)
 		self.labelStandingCharge.setGeometry(QRect(250, 90, 150, 17))
 		self.labelStandingCharge.setText ('Standing Charge') 
 		self.StandingCharge= QLineEdit(self.centralwidget)
-		self.StandingCharge.setGeometry(QRect(380, 90, 100, 25))
+		self.StandingCharge.setGeometry(QRect(380, 90, 75, 20))
 		
 		self.labelBeforeVat= QLabel(self.centralwidget)
 		self.labelBeforeVat.setGeometry(QRect(250, 110, 150, 17))
 		self.labelBeforeVat.setText ('Charge before VAT') 
 		self.BeforeVat= QLineEdit(self.centralwidget)
-		self.BeforeVat.setGeometry(QRect(380, 110, 100, 25))
+		self.BeforeVat.setGeometry(QRect(380, 110, 75, 20))
 		
 		self.labelWithVat= QLabel(self.centralwidget)
 		self.labelWithVat.setGeometry(QRect(250, 130, 150, 17))
 		self.labelWithVat.setText ('To Pay with VAT') 
 		self.WithVat= QLineEdit(self.centralwidget)
-		self.WithVat.setGeometry(QRect(380, 130, 100, 25))
+		self.WithVat.setGeometry(QRect(380, 130, 75, 20))
 		
 		self.button = QPushButton("Calculate",self.centralwidget)
 		self.button.move(250, 400)
