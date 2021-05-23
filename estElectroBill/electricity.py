@@ -11,18 +11,36 @@ from PyQt5.QtCore import (QRect, Qt)
 from datetime import datetime
 startvalue = str(0)
 
+
+
 class Ui_MainWindow(QMainWindow):
 
 	def setupUi(self, MainWindow):
-		MainWindow.resize(600, 500)
+		MainWindow.resize(550, 400)
 		self.centralwidget = QWidget(MainWindow) #centralwidget start
 		self.label = QLabel(self.centralwidget)
 		self.label.setGeometry(QRect(30, 50, 67, 17))
 		
+		########## text Labels
 		self.labelIntro = QLabel(self.centralwidget)
 		self.labelIntro.setGeometry(QRect(75, 20, 400, 17))
 		self.labelIntro.setText ('Please Enter Old value, New value and Days') 
 		
+		self.labelEnd = QLabel(self.centralwidget)
+		self.labelEnd.setGeometry(QRect(180, 330, 400, 17))
+		self.labelEnd.setText ('Pay with VAT is estimate, no discount added') 
+		
+		###### Push buttons
+			
+		self.button = QPushButton("Calculate Days",self.centralwidget)
+		self.button.move(250, 300)
+		self.button.setStyleSheet("background-color : yellow")
+		self.button.clicked.connect(self.daysCounted)
+
+		self.button = QPushButton("Calculate Total Sum",self.centralwidget)
+		self.button.move(240, 350)
+		self.button.clicked.connect(self.on_Calculate)
+
 		# Left side
 		self.labelOldValue = QLabel(self.centralwidget)
 		self.labelOldValue.setGeometry(QRect(50, 70, 85, 17))
@@ -46,13 +64,14 @@ class Ui_MainWindow(QMainWindow):
 		self.labelDifference.setText ('Used') 
 		self.differenceValue= QLineEdit(self.centralwidget)
 		self.differenceValue.setGeometry(QRect(140, 110, 75, 20))
-
+		self.differenceValue.setAlignment(Qt.AlignCenter)
 		
 		self.labelUnitUsageUnitPrice = QLabel(self.centralwidget)
 		self.labelUnitUsageUnitPrice.setGeometry(QRect(50, 130, 75, 17))
 		self.labelUnitUsageUnitPrice.setText ('Basic €') 
 		self.unitUsageUnitPrice= QLineEdit(self.centralwidget)
 		self.unitUsageUnitPrice.setGeometry(QRect(140, 130, 75, 20))
+		self.unitUsageUnitPrice.setAlignment(Qt.AlignCenter)
 
 		# Right side
 		self.labelDays= QLabel(self.centralwidget)
@@ -68,37 +87,28 @@ class Ui_MainWindow(QMainWindow):
 		self.labelStandingCharge.setText ('Standing Charge') 
 		self.StandingCharge= QLineEdit(self.centralwidget)
 		self.StandingCharge.setGeometry(QRect(380, 90, 75, 20))
-		
+		self.StandingCharge.setAlignment(Qt.AlignCenter)
+
 		self.labelBeforeVat= QLabel(self.centralwidget)
 		self.labelBeforeVat.setGeometry(QRect(250, 110, 150, 17))
 		self.labelBeforeVat.setText ('Charge before VAT') 
 		self.BeforeVat= QLineEdit(self.centralwidget)
 		self.BeforeVat.setGeometry(QRect(380, 110, 75, 20))
+		self.BeforeVat.setAlignment(Qt.AlignCenter)
 		
 		self.labelWithVat= QLabel(self.centralwidget)
 		self.labelWithVat.setGeometry(QRect(250, 130, 150, 17))
 		self.labelWithVat.setText ('To Pay with VAT') 
 		self.WithVat= QLineEdit(self.centralwidget)
 		self.WithVat.setGeometry(QRect(380, 130, 75, 20))
-		
-		self.button = QPushButton("Calculate",self.centralwidget)
-		self.button.move(250, 400)
-		self.button.clicked.connect(self.on_Calculate)
-		
-		self.button = QPushButton("Calculate Days",self.centralwidget)
-		self.button.move(250, 300)
-		self.button.setStyleSheet("background-color : yellow")
-		self.button.clicked.connect(self.daysCounted)
-		
-		self.labelEnd = QLabel(self.centralwidget)
-		self.labelEnd.setGeometry(QRect(75, 370, 400, 17))
-		self.labelEnd.setText ('Pay with VAT is estimate, no discount added') 
-		
-##########  Day calculation start
+		self.WithVat.setAlignment(Qt.AlignCenter)
+
+
+		##########  Day calculation start
 		
 		#Date From
 		self.labelFromDate = QLabel(self.centralwidget)
-		self.labelFromDate.setGeometry(QRect(30, 200,75,17))
+		self.labelFromDate.setGeometry(QRect(100, 200,75,17))
 		self.labelFromDate.setText('From Date')
 
 		self.labelFromDateDay= QLabel(self.centralwidget)
@@ -110,24 +120,24 @@ class Ui_MainWindow(QMainWindow):
 		self.fromDateDay.setAlignment(Qt.AlignCenter)
 		
 		self.labelFromDateMonth= QLabel(self.centralwidget)
-		self.labelFromDateMonth.setGeometry(QRect(300, 180, 150, 17))
+		self.labelFromDateMonth.setGeometry(QRect(280, 180, 150, 17))
 		self.labelFromDateMonth.setText ('Month') 
 		self.fromDateMonth= QLineEdit(self.centralwidget)
-		self.fromDateMonth.setGeometry(QRect(300, 200, 50, 25))
+		self.fromDateMonth.setGeometry(QRect(270, 200, 50, 25))
 		self.fromDateMonth.insert(startvalue)
 		self.fromDateMonth.setAlignment(Qt.AlignCenter)
 		
 		self.labelFromDateYear= QLabel(self.centralwidget)
-		self.labelFromDateYear.setGeometry(QRect(410, 180, 150, 17))
+		self.labelFromDateYear.setGeometry(QRect(360, 180, 150, 17))
 		self.labelFromDateYear.setText ('Year') 
 		self.fromDateYear= QLineEdit(self.centralwidget)
-		self.fromDateYear.setGeometry(QRect(400, 200, 50, 25))
+		self.fromDateYear.setGeometry(QRect(350, 200, 50, 25))
 		self.fromDateYear.insert(startvalue)
 		self.fromDateYear.setAlignment(Qt.AlignCenter)
 		
 		#Date To
 		self.labelToDate = QLabel(self.centralwidget)
-		self.labelToDate.setGeometry(QRect(30, 275,75,17))
+		self.labelToDate.setGeometry(QRect(100, 275,75,17))
 		self.labelToDate.setText('To Date')
 		
 		self.labelToDateDay= QLabel(self.centralwidget)
@@ -139,22 +149,22 @@ class Ui_MainWindow(QMainWindow):
 		self.toDateDay.setAlignment(Qt.AlignCenter)
 		
 		self.labelToDateMonth= QLabel(self.centralwidget)
-		self.labelToDateMonth.setGeometry(QRect(300, 250, 150, 17))
+		self.labelToDateMonth.setGeometry(QRect(280, 250, 150, 17))
 		self.labelToDateMonth.setText ('Month ') 
 		self.toDateMonth= QLineEdit(self.centralwidget)
-		self.toDateMonth.setGeometry(QRect(300, 270, 50, 25))
+		self.toDateMonth.setGeometry(QRect(270, 270, 50, 25))
 		self.toDateMonth.insert(startvalue)
 		self.toDateMonth.setAlignment(Qt.AlignCenter)
 
 		self.labelToDateYear= QLabel(self.centralwidget)
-		self.labelToDateYear.setGeometry(QRect(410, 250, 150, 17))
+		self.labelToDateYear.setGeometry(QRect(360, 250, 150, 17))
 		self.labelToDateYear.setText ('Year') 
 		self.toDateYear= QLineEdit(self.centralwidget)
-		self.toDateYear.setGeometry(QRect(400, 270, 50, 25))
+		self.toDateYear.setGeometry(QRect(350, 270, 50, 25))
 		self.toDateYear.insert(startvalue)
 		self.toDateYear.setAlignment(Qt.AlignCenter)
 
-####### Day calculation end
+
 		
 		MainWindow.setCentralWidget(self.centralwidget) 
 		
@@ -177,13 +187,16 @@ class Ui_MainWindow(QMainWindow):
 		amountDays = str(timedelta.days)
 		self.Days.clear()
 		self.Days.insert(amountDays)
-		
+	####### Day calculation end
+	# 	
 	def on_Calculate(self):
+		
 		self.StandingCharge.clear()
 		self.unitUsageUnitPrice.clear()
 		self.differenceValue.clear()
 		self.BeforeVat.clear()
 		self.WithVat.clear()
+		
 		
 		valueNew = int(self.newValueInn.text())
 		valueOld = int(self.OldValueInn.text())
@@ -193,7 +206,9 @@ class Ui_MainWindow(QMainWindow):
 		amount = str(round(differentValue *0.1753 ,2))
 		self.unitUsageUnitPrice.insert(amount)
 		
+
 		daysInserted = int(self.Days.text())
+
 		daysChargeShow = str(round(daysInserted*0.5517 ,2))
 		self.StandingCharge.insert(daysChargeShow)
 		
@@ -206,7 +221,8 @@ class Ui_MainWindow(QMainWindow):
 			pso = 0
 		else: 
 			pso = 6.52
-		
+
+
 		chargeWithVat = ((((daysInserted*0.5517)+ (differentValue *0.1753))+pso) *1.13)
 		chargeWithVat = str(round(chargeWithVat, 2))
 		self.WithVat.insert(chargeWithVat)
