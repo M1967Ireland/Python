@@ -1,3 +1,18 @@
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# The above copyright notice and this permission notice shall be included in
+#  all copies or substantial portions of the Software.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE
 ###########
 #
 # estElectroBill v.2
@@ -51,7 +66,7 @@ class Ui_MainWindow(QMainWindow):
 		self.button = QPushButton("Calculate Total Sum",self.centralwidget)
 		self.button.move(240, 350)
 		self.button.clicked.connect(self.on_Calculate)		
-	
+
 	def leftSide(self):
 		self.labelOldValue = QLabel(self.centralwidget)
 		self.labelOldValue.setGeometry(QRect(50, 70, 85, 17))
@@ -228,8 +243,10 @@ class Ui_MainWindow(QMainWindow):
 			pso = 6.52
 
 		if daysInserted == 0:
-			daysInserted = self.amountDays # if forgetting to count days before total
-
+			try:
+				daysInserted = self.amountDays # if forgetting to count days before total
+			except AttributeError as ae:
+				return
 		chargeWithVat = ((((daysInserted*0.5517)+ (differentValue *0.1753))+pso) *1.13)
 		chargeWithVat = str(round(chargeWithVat, 2))
 		self.WithVat.insert(chargeWithVat)
